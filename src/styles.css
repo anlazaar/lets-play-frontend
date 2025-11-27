@@ -1,0 +1,176 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary: #000000;
+  --secondary: #ffffff;
+  --accent: #45d4ff;
+  --oblic: #292e2c;
+  --error: #ff4d4d;
+  --shadow: 8px 8px 0px var(--oblic);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+}
+
+body {
+  background-color: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 500px;
+  border: 3px solid var(--oblic);
+  padding: 40px 50px;
+  background-color: var(--secondary);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: -6px;
+  bottom: -6px;
+  z-index: -1;
+}
+
+h1 {
+  color: var(--primary);
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--primary);
+  background-color: var(--secondary);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+input:focus {
+  box-shadow: 4px 4px 0px var(--primary);
+}
+
+.main-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--accent);
+  color: var(--secondary);
+  border: 2px solid var(--primary);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+
+.main-btn:hover {
+  box-shadow: 4px 4px 0px var(--primary);
+  transform: translate(-2px, -2px);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 2px solid var(--primary);
+  margin: 0 10px;
+}
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--primary);
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  gap: 12px; /* space between icon and text */
+  transition: all 0.3s;
+  border-radius: 6px;
+}
+
+.social-btn fa-icon {
+  font-size: 20px;
+}
+
+.social-btn:hover {
+  box-shadow: 4px 4px 0px var(--primary);
+  transform: translate(-2px, -2px);
+  gap: 120px;
+}
+
+.social-btn.google {
+  border-color: #db4437; /* Google red */
+  color: #db4437;
+}
+
+.social-btn.google:hover {
+  box-shadow: 4px 4px 0px #db4437;
+  transform: translate(-2px, -2px);
+}
+
+.social-btn.github {
+  border-color: #333;
+  color: #333;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--primary);
+}
+
+.footer a {
+  color: var(--primary);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.error {
+  color: var(--error);
+  margin-top: 5px;
+}

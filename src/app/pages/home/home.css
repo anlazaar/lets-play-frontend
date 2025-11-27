@@ -1,0 +1,45 @@
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* smaller min for mobile */
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  border: 3px solid var(--primary);
+  padding: 20px;
+  background-color: var(--secondary);
+  box-shadow: var(--shadow);
+  font-family: 'Courier New', monospace;
+  position: relative;
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-wrap: break-word; /* prevents overflow on small screens */
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px var(--primary);
+}
+
+.product-card h2 {
+  font-size: 18px; /* slightly smaller for mobile readability */
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.loading {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--primary);
+}

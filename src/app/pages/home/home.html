@@ -1,0 +1,28 @@
+@if (!loading) { @if (isAdmin) { @if (showAddProduct) {
+<app-add-product (close)="toggleAddProduct()"></app-add-product>
+}
+
+<div class="admin-section">
+  <h2>Admin Controls</h2>
+  <button class="main-btn" (click)="toggleAddProduct()">Add Product</button>
+  <button class="main-btn">Modify Products</button>
+</div>
+} @if(!token) {
+<button class="main-btn" routerLink="/auth/login">Go to Register Page</button>
+}
+
+<div class="products-container">
+  @for (p of products; track $index) {
+  <div class="product-card" [routerLink]="['/product', p.id]">
+    <div class="data-section">
+      <h2>{{ p.name }}</h2>
+      <p><strong>Price:</strong> {{ p.price }} MAD</p>
+      <p><strong>Quantity:</strong> {{ p.quantity }}</p>
+    </div>
+  </div>
+  }
+</div>
+
+} @else {
+<div class="loading">Loading products...</div>
+}

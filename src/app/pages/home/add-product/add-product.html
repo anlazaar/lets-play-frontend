@@ -1,0 +1,42 @@
+<div class="add-product-overlay">
+  <div class="add-product-container">
+    <button class="close-btn" (click)="onClose()">×</button>
+    <h2>Add New Product</h2>
+
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name" />
+        @if(productForm.get('name')?.hasError('required') && productForm.get('name')?.touched) {
+        <div class="error"><small>Name Required</small></div>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="price">Price</label>
+        <input id="price" type="number" formControlName="price" />
+        @if(productForm.get('price')?.hasError('min') && productForm.get('price')?.touched) {
+        <div class="error"><small>Price must be at least 1$</small></div>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="quantity">Quantity</label>
+        <input id="quantity" type="number" formControlName="quantity" />
+        @if(productForm.get('quantity')?.hasError('min') && productForm.get('quantity')?.touched) {
+        <div class="error"><small>Quantity must be at least 1</small></div>
+        }
+      </div>
+
+      <button class="add-product-btn" type="submit" [disabled]="productForm.invalid">
+        Add Product
+      </button>
+    </form>
+
+    @if (successMessage) {
+    <p class="success">{{ successMessage }}</p>
+    } @else if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+    }
+  </div>
+</div>

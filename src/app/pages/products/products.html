@@ -1,0 +1,16 @@
+@if(product){
+<div class="product-details-container">
+  <div class="product-details-card">
+    <h1>{{ product.name }}</h1>
+
+    <div class="info">
+      <p><strong>Price:</strong> {{ product.price }} MAD</p>
+      <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+    </div>
+
+    <button class="main-btn back-btn" routerLink="/">← Back to Products</button>
+  </div>
+</div>
+} @else {
+<div class="loading">Loading product...</div>
+}

@@ -1,0 +1,51 @@
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1>LOGIN</h1>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+
+      <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+        <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="••••••••" />
+
+      <div
+        class="error"
+        *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+      >
+        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          Password must be at least 6 characters.
+        </small>
+      </div>
+    </div>
+
+    <div class="error">
+      {{ errorMessage }}
+    </div>
+
+    <button class="main-btn" type="submit" [disabled]="loginForm.invalid">Login</button>
+
+    <div class="divider">OR</div>
+
+    <div class="social-login">
+      <button class="social-btn google">
+        <fa-icon [icon]="faGoogle"></fa-icon>
+        <span>Google</span>
+      </button>
+      <button class="social-btn github">
+        <fa-icon [icon]="faGithub"></fa-icon>
+        <span>GitHub</span>
+      </button>
+    </div>
+
+    <div class="footer">Don't have an account? <a routerLink="../register">Sign up</a></div>
+  </form>
+</div>
