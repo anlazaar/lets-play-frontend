@@ -1,0 +1,193 @@
+.add-post-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.add-post-container {
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 2px solid var(--border);
+  padding: 40px 50px;
+  background-color: var(--secondary-elevated);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  font-weight: bold;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.close-btn:hover {
+  color: var(--text-primary);
+}
+
+h2 {
+  color: var(--text-primary);
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: left;
+  letter-spacing: -0.5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  background-color: var(--secondary);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  outline: none;
+  transition: all var(--transition-fast);
+  resize: vertical;
+  min-height: 120px;
+}
+
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+textarea:hover {
+  border-color: var(--accent-hover);
+  background-color: var(--hover-overlay);
+}
+
+textarea:focus {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--accent);
+  background-color: var(--secondary-elevated);
+}
+
+select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  background-color: var(--secondary);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  outline: none;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+select:hover {
+  border-color: var(--accent-hover);
+  background-color: var(--hover-overlay);
+}
+
+select:focus {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--accent);
+  background-color: var(--secondary-elevated);
+}
+
+input[type='file'] {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.preview-container {
+  margin: 25px 0;
+  padding: 20px;
+  background-color: var(--secondary);
+  border: 2px solid var(--border-muted);
+  transition: background-color var(--transition-normal);
+}
+
+.preview-container h3 {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.preview-image,
+.preview-video {
+  max-width: 100%;
+  max-height: 300px;
+  border: 2px solid var(--border);
+  display: block;
+  margin: 0 auto;
+}
+
+.add-post-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: var(--accent);
+  color: var(--text-inverse);
+  border: 2px solid var(--accent);
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all var(--transition-fast);
+}
+
+.add-post-btn:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  box-shadow: var(--shadow-sm);
+  transform: translate(-1px, -1px);
+}
+
+.add-post-btn:active:not(:disabled) {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+.add-post-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 540px) {
+  .add-post-container {
+    padding: 30px 25px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}

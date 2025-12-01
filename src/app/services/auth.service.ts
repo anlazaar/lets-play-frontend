@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ApiService {
-  private api = 'http://localhost:8080/';
+  private api = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
 
   apiCommunicator(path: string, data: any): Observable<any> {
-      return this.http.post(`${this.api + path}`, data);  
+    return this.http.post(`${this.api + path}`, data);
   }
 }

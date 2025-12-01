@@ -1,0 +1,57 @@
+<div class="login-page">
+  <div class="login-container">
+    <form [formGroup]="publicInfoForm" (ngSubmit)="onSubmit()">
+      <div class="title">
+        <h1>Complete Your Profile</h1>
+        <p>Add the information you want to show on your public profile.</p>
+      </div>
+
+      <div class="social-login">
+        <div>
+          <label>First name</label>
+          <input type="text" formControlName="firstname" placeholder="Anass" />
+        </div>
+        <div>
+          <label>Last name</label>
+          <input type="text" formControlName="lastname" placeholder="lazaar" />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Bio</label>
+        <textarea
+          formControlName="bio"
+          placeholder="Tell us something about yourself..."
+          rows="4"
+        ></textarea>
+
+        <div
+          class="error"
+          *ngIf="publicInfoForm.get('bio')?.touched && publicInfoForm.get('bio')?.invalid"
+        >
+          <small>Bio is required.</small>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Profile Image</label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+
+        <div class="avatar-preview" *ngIf="avatarPreview">
+          <img [src]="avatarPreview" alt="Avatar Preview" />
+        </div>
+
+        <div class="error" *ngIf="fileError">
+          <small>{{ fileError }}</small>
+        </div>
+      </div>
+      
+
+      <button class="main-btn" type="submit" [disabled]="publicInfoForm.invalid">
+        Save Profile
+      </button>
+
+      <button class="secondary-btn" type="button" (click)="skip()">Do it later</button>
+    </form>
+  </div>
+</div>

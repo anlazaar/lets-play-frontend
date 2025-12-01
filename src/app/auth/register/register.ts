@@ -25,7 +25,7 @@ export class Register {
 
   registerForm = this.fb.group(
     {
-      name: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       repeatPassword: ['', [Validators.required]],
@@ -53,11 +53,15 @@ export class Register {
 
     const { repeatPassword, ...dataToSend } = this.registerForm.value;
 
-    this.auth.apiCommunicator('auth/register', dataToSend).subscribe({
+    this.auth.apiCommunicator('/register', dataToSend).subscribe({
       next: (res) => {
         console.log('REGISTER SUCCESS', res);
         localStorage.setItem('token', res.token);
-        this.router.navigate(['/']);
+        if (!res.isCompleted) {
+          this.router.navigate(['profile/update']);
+        } else {
+          this.router.navigate(['/']);
+        }
       },
       error: (err) => console.error(err),
     });

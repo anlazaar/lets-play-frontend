@@ -1,0 +1,127 @@
+/* --------------------------------------------- */
+/* AFTER-REGISTER PROFILE FORM STYLES            */
+/* --------------------------------------------- */
+
+/* Textarea (Bio) */
+.input-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  background-color: var(--secondary);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+  transition: all var(--transition-fast);
+}
+
+.input-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.input-group textarea:hover {
+  border-color: var(--accent-hover);
+  background-color: var(--hover-overlay);
+}
+
+.input-group textarea:focus {
+  border-color: var(--accent);
+  background-color: var(--secondary-elevated);
+  box-shadow: var(--shadow-sm);
+}
+
+.input-group textarea:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Avatar Preview */
+.avatar-preview {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.avatar-preview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  box-shadow: var(--shadow-accent);
+  transition: all var(--transition-fast);
+}
+
+/* Hover effect for preview */
+.avatar-preview img:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Secondary Button ("Do it later") */
+.secondary-btn {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: var(--secondary);
+  color: var(--text-primary);
+  border: 2px solid var(--border);
+  font-size: 16px;
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all var(--transition-fast);
+}
+
+.secondary-btn:hover {
+  background-color: var(--hover-overlay);
+  box-shadow: var(--shadow-sm);
+  transform: translate(-1px, -1px);
+}
+
+.secondary-btn:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+.secondary-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Error messages already inherit global styles */
+.error {
+  color: var(--error);
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* Ensure container still matches login styles */
+.login-container {
+  max-width: 500px;
+  padding: 40px 50px;
+  border: 2px solid var(--border);
+  background-color: var(--secondary-elevated);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+}
+
+.social-login {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.input-group input[type='file'] {
+  padding: 10px 0;
+}
+
+.avatar-preview img {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+}

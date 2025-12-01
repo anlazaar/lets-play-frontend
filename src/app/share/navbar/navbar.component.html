@@ -1,0 +1,78 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-brand" (click)="closeMobileMenu()">
+      <span class="brand-prefix">01</span>
+      <span class="brand-separator">-</span>
+      <span class="brand-name">blog</span>
+    </a>
+
+    <!-- Desktop  -->
+    <div class="navbar-desktop">
+      <div class="navbar-actions">
+        <app-theme-toggle></app-theme-toggle>
+
+        <ng-container *ngIf="!isLoggedIn">
+          <a routerLink="/auth/login" class="nav-link">Login</a>
+          <a routerLink="/auth/register" class="nav-btn primary">Register</a>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <img
+            [src]="avatarUrl"
+            class="nav-avatar"
+            [routerLink]="['/profile', userId, 'block']"
+            [alt]="username"
+            [aria-placeholder]="username"
+          />
+          <p style="text-align: center">{{ username }}</p>
+          <button (click)="logout()" class="nav-btn logout">Logout</button>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="navbar-mobile-controls">
+      <app-theme-toggle></app-theme-toggle>
+      <button
+        class="hamburger"
+        (click)="toggleMobileMenu()"
+        [class.active]="isMobileMenuOpen"
+        aria-label="Toggle menu"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.open]="isMobileMenuOpen">
+    <div class="mobile-menu-content">
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="mobile-link" (click)="closeMobileMenu()">Login</a>
+        <a routerLink="/register" class="mobile-link primary" (click)="closeMobileMenu()"
+          >Register</a
+        >
+      </ng-container>
+
+      <ng-container *ngIf="isLoggedIn">
+        <!-- <button routerLink="/profile" style="cursor: pointer"> -->
+        <img
+          *ngIf="avatarUrl"
+          [src]="avatarUrl"
+          class="mobile-avatar"
+          [alt]="username"
+          [routerLink]="['/profile', userId, '/block']"
+        />
+        <p style="text-align: center">{{ username }}</p>
+        <!-- </button> -->
+        <button (click)="logout()" class="mobile-link logout">Logout</button>
+      </ng-container>
+    </div>
+  </div>
+</nav>
+
+<!-- Overlay for mobile menu -->
+<div class="mobile-overlay" [class.visible]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>

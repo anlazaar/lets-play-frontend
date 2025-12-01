@@ -1,0 +1,11 @@
+.main-content,
+main,
+.app-content {
+  padding-top: 64px; /* Same height as navbar */
+}
+
+/* Option 2: If your router-outlet content needs spacing */
+router-outlet + * {
+  display: block;
+  padding-top: 64px;
+}

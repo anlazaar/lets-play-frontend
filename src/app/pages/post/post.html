@@ -1,0 +1,36 @@
+@if (loading) {
+<div class="loading-text">Loading...</div>
+
+}@else if (post) {
+<div class="post-page" *ngIf="!loading && post">
+  <div class="post-card">
+    <h1>{{ post.title }}</h1>
+    <p class="author">by {{ post.author.username }}</p>
+
+    <!-- Media -->
+    @if (post.mediaUrl) {
+    <div class="media">
+      @if (post.mediaType == "IMAGE") {
+      <img [src]="'http://localhost:8080' + post.mediaUrl" alt="Post image" />
+      } @else if (post.mediaType == "VIDEO") {
+      <video [src]="'http://localhost:8080' + post.mediaUrl" controls></video>
+      }
+    </div>
+    }
+
+    <p class="description">{{ post.description }}</p>
+
+    <div class="stats">
+      <span>{{ post.likeCount }} Likes</span>
+      <!-- <span>{{ post.commentCount }} Comments</span> -->
+    </div>
+
+    <button class="like-btn" [class.liked]="post.likedByCurrentUser" (click)="toggleLike(post)">
+      <fa-icon [icon]="post.likedByCurrentUser ? faHeartSolid : faHeartRegular"></fa-icon>
+      <span>{{ post.likeCount }}</span>
+    </button>
+  </div>
+</div>
+} @else {
+<h1>Post not found</h1>
+}

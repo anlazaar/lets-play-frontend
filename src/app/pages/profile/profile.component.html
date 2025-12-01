@@ -1,0 +1,73 @@
+@if (user){
+<div class="profile-container">
+  <div class="profile-card">
+    <!-- Avatar -->
+    <div class="avatar-wrapper">
+      <img [src]="user?.avatarUrl" alt="User avatar" class="avatar" />
+    </div>
+
+    <!-- User Info -->
+    <div class="profile-info-section">
+      <h2 class="name">{{ user.lastname }} {{ user.firstname }}</h2>
+
+      <p class="username">@{{ user.username }}</p>
+
+      <p class="bio" *ngIf="user?.bio; else noBio">
+        {{ user?.bio }}
+      </p>
+      <ng-template #noBio>
+        <p class="bio empty">No bio yet.</p>
+      </ng-template>
+
+      <!-- Follow Button -->
+      @if (!isCurrentUser) {
+      <div class="btn-wrapper">
+        <button class="btn follow-btn" (click)="toggleFollow()">
+          {{ user.following ? 'Unfollow' : 'Follow' }}
+        </button>
+      </div>
+      }
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-box">
+        <span class="stat-number">{{ user.followersCount || 0 }}</span>
+        <span class="stat-label">Followers</span>
+      </div>
+
+      <div class="stat-box">
+        <span class="stat-number">{{ user.followingCount || 0 }}</span>
+        <span class="stat-label">Following</span>
+      </div>
+    </div>
+  </div>
+</div>
+@if (user.posts.length != 0) {
+<h1 class="post-header">{{ isCurrentUser ? 'Your Posts' : 'User Posts' }}</h1>
+<div class="blogs-grid">
+  @for (p of user.posts; track $index) {
+  <div class="blog-card" [routerLink]="['/posts', p.id]">
+    <!-- Author info -->
+    <p class="blog-info">{{ p.author }}</p>
+
+    <!-- Media -->
+    @if (p.mediaUrl) { @if (p.mediaType == "IMAGE") {
+    <img class="blog-image" [src]="'http://localhost:8080' + p.mediaUrl" alt="Blog image" />
+    } @else {
+    <video class="blog-image" [src]="'http://localhost:8080' + p.mediaUrl" controls></video>
+    } }
+
+    <!-- Post content -->
+    <div class="blog-info">
+      <p class="meta">Insight • {{ p.createdAt | date }}</p>
+      <h2 class="blog-title">{{ p.title }}</h2>
+      <p class="blog-desc">{{ p.description }}</p>
+    </div>
+  </div>
+  }
+</div>
+
+} @else {
+<div><h2 class="post-header">No Post Yet!</h2></div>
+} }

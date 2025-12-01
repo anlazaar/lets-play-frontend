@@ -1,28 +1,51 @@
-@if (!loading) { @if (isAdmin) { @if (showAddProduct) {
-<app-add-product (close)="toggleAddProduct()"></app-add-product>
+@if (!loading) {
+
+<!-- If Admin -->
+@if (showAddPost) {
+<app-add-post (close)="toggleAddPost()"></app-add-post>
 }
 
-<div class="admin-section">
-  <h2>Admin Controls</h2>
-  <button class="main-btn" (click)="toggleAddProduct()">Add Product</button>
-  <button class="main-btn">Modify Products</button>
+<!-- Blog Header -->
+<div class="blogs-header">
+  <h1>Our Blogs</h1>
+
+  <div class="search-bar-container">
+    <input type="text" placeholder="Search blogs..." class="search-input" />
+    <button class="main-btn" (click)="toggleAddPost()">Add Post</button>
+  </div>
 </div>
-} @if(!token) {
-<button class="main-btn" routerLink="/auth/login">Go to Register Page</button>
-}
 
-<div class="products-container">
-  @for (p of products; track $index) {
-  <div class="product-card" [routerLink]="['/product', p.id]">
-    <div class="data-section">
-      <h2>{{ p.name }}</h2>
-      <p><strong>Price:</strong> {{ p.price }} MAD</p>
-      <p><strong>Quantity:</strong> {{ p.quantity }}</p>
+<!-- Posts Section -->
+@if (posts.length != 0) {
+
+<div class="blogs-grid">
+  @for (p of posts; track $index) {
+  <div class="blog-card" [routerLink]="['/posts', p.id]">
+    <!-- Image (fallback if missing) -->
+    <p class="blog-info">{{ p.author.username }}</p>
+    @if (p.mediaUrl) { @if (p.mediaType == "IMAGE") {
+    <img class="blog-image" [src]="'http://localhost:8080' + p.mediaUrl" alt="Blog image" />
+    } @else {
+    <video class="blog-image" [src]="'http://localhost:8080' + p.mediaUrl" controls></video>
+    } }
+
+    <div class="blog-info">
+      <p class="meta">Insight • {{ p.createdAt | date }}</p>
+
+      <h2 class="blog-title">
+        {{ p.title }}
+      </h2>
+
+      <p class="blog-desc">
+        {{ p.description }}
+      </p>
     </div>
   </div>
   }
 </div>
 
 } @else {
-<div class="loading">Loading products...</div>
+<div><h2>No Post Yet!</h2></div>
+} } @else {
+<div class="loading">Loading posts...</div>
 }

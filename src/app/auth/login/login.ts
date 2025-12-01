@@ -5,11 +5,13 @@ import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { ApiService } from '../../services/auth.service';
+import { MaterialImports } from '../../material-imports';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, FontAwesomeModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, FontAwesomeModule, ...MaterialImports],
   providers: [ApiService],
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
@@ -22,6 +24,7 @@ export class Login {
   private auth = inject(ApiService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  private tokenService = inject(TokenService);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -31,11 +34,16 @@ export class Login {
   onSubmit() {
     if (this.loginForm.invalid) return;
 
-    this.auth.apiCommunicator('auth/login', this.loginForm.value).subscribe({
+    this.auth.apiCommunicator('/login', this.loginForm.value).subscribe({
       next: (res) => {
         console.log('LOGIN SUCCESS', res);
-        localStorage.setItem('token', res.token);
+        this.tokenService.setToken(res.token);
         this.router.navigate(['/']);
+        if (!res.isCompleted) {
+          this.router.navigate(['profile/update']);
+        } else {
+          this.router.navigate(['/']);
+        }
       },
       error: (err) => {
         console.log('LOGIN ERROR :', err);

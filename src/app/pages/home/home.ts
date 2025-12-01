@@ -1,40 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../services/product.service';
+import { PostService } from '../../services/post.service';
 import { TokenService } from '../../services/token.service';
 import { CommonModule } from '@angular/common';
-import { Product } from '../../services/product.service';
-import { AddProduct } from './add-product/add-product';
-import { RouterLink } from "@angular/router";
+import { AddPost } from './add-post/add-post';
+import { RouterLink } from '@angular/router';
+import { PostResponse } from '../../models/global.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, AddProduct, RouterLink],
-  providers: [ProductService],
+  imports: [CommonModule, AddPost, RouterLink],
+  providers: [PostService],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit {
-  products: Product[] = [];
+export class Home {
+  posts: PostResponse[] = [];
   loading = false;
   isAdmin = false;
-  token: string | null = ""
+  token: string | null = '';
 
-  showAddProduct = false;
+  showAddPost = false;
 
-  constructor(private productService: ProductService, private tokenService: TokenService) {}
-
+  constructor(private postService: PostService, private tokenService: TokenService) {}
 
   ngOnInit(): void {
     this.token = this.tokenService.getToken();
     this.isAdmin = this.tokenService.isAdmin();
 
-    this.productService.getAllProducts().subscribe({
+    this.postService.getAllPosts().subscribe({
       next: (data) => {
-        this.products = data;
-        console.log("PRODUCTS", data)
-        
-        
+        this.posts = data;
+        console.log('POSTS', data);
       },
       error: (err) => {
         console.log(err);
@@ -43,7 +40,7 @@ export class Home implements OnInit {
     });
   }
 
-  toggleAddProduct() {
-    this.showAddProduct = !this.showAddProduct;
+  toggleAddPost() {
+    this.showAddPost = !this.showAddPost;
   }
 }
